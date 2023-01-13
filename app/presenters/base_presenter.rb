@@ -1,10 +1,12 @@
-class BasePresenter
-	def initialize(project, template)
-		@project  = project
-		@template = template
-	end
+# frozen_string_literal: true
 
-	def h
-		@template
-	end
+class BasePresenter
+  def initialize(project, template)
+    @project  = project
+    @template = template
+  end
+
+  def h
+    @template
+  end
 end
