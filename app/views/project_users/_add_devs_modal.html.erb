@@ -1,0 +1,26 @@
+<!-- Modal -->
+<div class="modal fade" id="add_dev_modal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+    
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Add Developer to project</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      
+      <!-- Modal body -->
+      <div class="modal-body">
+
+		    <ul class="list-group">
+			    <% @pp.un_assigned_devs.each do |dev| %>
+  			      <li class="list-group-item d-flex justify-content-between align-items-center" id="<%=dev.id%>"> <%=dev.name%>
+  				      <%=@pp.link_to_add_user_to_project(dev.id)%>
+  			      </li>
+			    <%end%>
+		    </ul>
+	    </div>
+      
+    </div>
+  </div>
+</div>

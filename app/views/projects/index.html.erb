@@ -1,0 +1,22 @@
+<%if current_user.manager?%>
+  <div class="row">
+    <h1 class="col-md-9"><%= current_user.name+"\'s "%>Projects</h1>
+    <div class="col-md-3 col-form-label">
+      <%= link_to "Create New Project", new_project_path, :class=>"btn btn-outline-primary"%>
+    </div>
+  </div>
+  <hr/>
+<%end%>
+<div class="row">
+  <%@projects.each do |p| %>
+  	<div class="col-md-4">
+  	  <div class="card">
+  	      <%= link_to (current_user.manager?)? p : (current_user.qa?)? new_bug_path(:project_id=>p.id) : bugs_path(:project_id=>p.id),:class=>"btn" do%>
+            <h3 class="card-header bg-info text-white"><%= p.name %></h3>
+            <p class="card-body text-justify"><%= p.description %></p>
+          <%end%>
+        </div>
+      <hr>
+    </div>
+  <%end%>
+</div>

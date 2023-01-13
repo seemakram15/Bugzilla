@@ -1,0 +1,87 @@
+<div class="container">
+  <div id="collapse_wrapper">
+    <div class="card">
+      <a class="card-link text-white" data-toggle="collapse" href="#collapse_feature">
+        <div class="card-header bg-warning">
+          <div class="row">
+          <h3 class="col-md-3">Features</h3>
+          <div class="col-md-2 col-form-label ">Total : <span class="badge badge-light"><%=@view_data[:total_features]%></span></div>
+          <div class="col-md-2 col-form-label ">New : <span class="badge badge-light"><%=@view_data[:new_features]%></span></div>
+          <div class="col-md-2 col-form-label ">Started : <span class="badge badge-light"><%=@view_data[:started_features]%></span></div>
+          <div class="col-md-2 col-form-label ">Completed : <span class="badge badge-light"><%=@view_data[:completed_features]%></span></div>
+        </div>
+        </div>
+      </a>
+      <div id="collapse_feature" class="collapse" data-parent="#collapse_wrapper">
+        <div class="card-body">
+          <table class="table">
+  					<thead>
+    					<tr>
+      					<th scope="col">Title</th>
+      					<th scope="col">Deadline</th>
+                <th scope="col">Status</th>
+                <th scope="col">Created By</th>
+                <th scope="col">Assign To</th>
+                <th scope="col">show</th>
+    					</tr>
+  					</thead>
+  					<tbody>
+    					<%@view_data[:features].each do |feature|%>
+    						<tr>
+      						<td><%= feature.title %></td>
+      						<td><%= feature.deadline.to_date.strftime("%a, %B, %e, %Y") if feature.deadline %></td>
+                  <td><%= feature.status %><%if feature.status == 'new' && feature.assign_to.nil?%><span class="spinner-grow spinner-grow-sm text-info"></span><%end%></td>
+      						<td><%= feature.creator.name %></td>
+      						<td><%= User.find(feature.assign_to).name if feature.assign_to %></td>
+      						<td><%= link_to 'show', feature,:class=>"btn btn-outline-primary" %></td>
+    						</tr>
+    					<%end%>
+    				</tbody>
+    			</table> 
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="collapsed card-link text-white" data-toggle="collapse" href="#collapse_bug">
+        <div class="card-header bg-danger">
+          <div class="row">
+            <h3 class="col-md-3">Bugs</h3>
+            <div class="col-md-2 col-form-label ">Total : <span class="badge badge-light"><%=@view_data[:total_bugs]%></span></div>
+            <div class="col-md-2 col-form-label ">New : <span class="badge badge-light"><%=@view_data[:new_bugs]%></span></div>
+            <div class="col-md-2 col-form-label ">Started : <span class="badge badge-light"><%=@view_data[:started_bugs]%></span></div>
+            <div class="col-md-2 col-form-label ">Resolved : <span class="badge badge-light"><%=@view_data[:resolved_bugs]%></span></div>
+          </div>
+        </div>
+      </a>
+      
+      <div id="collapse_bug" class="collapse show" data-parent="#collapse_wrapper">
+        <div class="card-body">
+          <table class="table">
+  					<thead>
+    					<tr>
+      					<th scope="col">Title</th>
+      					<th scope="col">Deadline</th>
+      					<th scope="col">Status</th>
+      					<th scope="col">Created By</th>
+      					<th scope="col">Assign To</th>
+      					<th scope="col">show</th>
+    					</tr>
+  					</thead>
+  					<tbody>
+    					<%@view_data[:bugs].each do |bug|%>
+    						<tr>
+      						<td><%= bug.title %></td>
+      						<td><%= bug.deadline.to_date.strftime("%a, %B, %e, %Y") if bug.deadline %></td>
+      						<td><%= bug.status %><%if bug.status == 'new' && bug.assign_to.nil?%><span class="spinner-grow spinner-grow-sm text-info"></span><%end%></td>
+      						<td><%= bug.creator.name %></td>
+      						<td><%= User.find(bug.assign_to).name if bug.assign_to %></td>
+      						<td><%= link_to 'show', bug,:class=>"btn btn-outline-primary" %></td>
+    					  </tr>
+    					<%end%>
+    				</tbody>
+    			</table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
